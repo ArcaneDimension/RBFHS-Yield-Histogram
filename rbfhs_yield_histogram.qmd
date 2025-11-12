@@ -1,0 +1,123 @@
+---
+format:
+  revealjs:
+    scrollable: true
+    theme: simple
+    css: style.css
+editor: visual
+---
+
+```{r}
+library(tidyverse)
+library(openxlsx)
+library(ggplot2)
+library(plotly)
+
+yield_data <- read.xlsx("D:\\WORK FILES\\DAC\\RBFHS\\RBFHS_Yield_MergeData_96-22.xlsx", sheet = "1996WS-2022DS_c")
+
+yield_data2 <- yield_data |> 
+  mutate(
+    item = item/1000
+  )
+
+yield_histo <- plot_ly(yield_data2, x = ~item) |> 
+      add_trace(y = ~`1996WS`, type = 'scatter', mode = 'lines',
+                name = '1996WS',
+                fill = 'tozeroy',
+                fillcolor = 'rgba(31, 119, 180, 0.5)',
+                line = list(color = 'rgba(31, 119, 180, 1)')) |> 
+      add_trace(y = ~`1997DS`, type = 'scatter', mode = 'lines',
+                name = '1997DS',
+                fill = 'tozeroy',
+                fillcolor = 'rgba(255, 127, 14, 0.5)',
+                line = list(color = 'rgba(255, 127, 14, 1)')) |> 
+      add_trace(y = ~`2001WS`, type = 'scatter', mode = 'lines',
+                name = '2001WS',
+                fill = 'tozeroy',
+                fillcolor = 'rgba(44, 160, 44, 0.5)',
+                line = list(color = 'rgba(44, 160, 44, 1)')) |> 
+      add_trace(y = ~`2002DS`, type = 'scatter', mode = 'lines',
+                name = '2002DS',
+                fill = 'tozeroy',
+                fillcolor = 'rgba(214, 39, 40, 0.5)',
+                line = list(color = 'rgba(214, 39, 40, 1)')) |> 
+      add_trace(y = ~`2006WS`, type = 'scatter', mode = 'lines',
+                name = '2006WS',
+                fill = 'tozeroy',
+                fillcolor = 'rgba(148, 103, 189, 0.5)',
+                line = list(color = 'rgba(148, 103, 189, 1)')) |> 
+      add_trace(y = ~`2007DS`, type = 'scatter', mode = 'lines',
+                name = '2007DS',
+                fill = 'tozeroy',
+                fillcolor = 'rgba(140, 86, 75, 0.5)',
+                line = list(color = 'rgba(140, 86, 75, 1)')) |> 
+      add_trace(y = ~`2011WS`, type = 'scatter', mode = 'lines',
+                name = '2011WS',
+                fill = 'tozeroy',
+                fillcolor = 'rgba(227, 119, 194, 0.5)',
+                line = list(color = 'rgba(227, 119, 194, 1)')) |> 
+      add_trace(y = ~`2012DS`, type = 'scatter', mode = 'lines',
+                name = '2012DS',
+                fill = 'tozeroy',
+                fillcolor = 'rgba(127, 127, 127, 0.5)',
+                line = list(color = 'rgba(127, 127, 127, 1)')) |> 
+      add_trace(y = ~`2016WS`, type = 'scatter', mode = 'lines',
+                name = '2016WS',
+                fill = 'tozeroy',
+                fillcolor = 'rgba(188, 189, 34, 0.5)',
+                line = list(color = 'rgba(188, 189, 34, 1)')) |> 
+      add_trace(y = ~`2017DS`, type = 'scatter', mode = 'lines',
+                name = '2017DS',
+                fill = 'tozeroy',
+                fillcolor = 'rgba(23, 190, 207, 0.5)',
+                line = list(color = 'rgba(23, 190, 207, 1)')) |> 
+      add_trace(y = ~`2021WS`, type = 'scatter', mode = 'lines',
+                name = '2021WS',
+                fill = 'tozeroy',
+                fillcolor = 'rgba(255, 152, 150, 0.5)',
+                line = list(color = 'rgba(255, 152, 150, 1)')) |> 
+      add_trace(y = ~`2022DS`, type = 'scatter', mode = 'lines',
+                name = '2022DS',
+                fill = 'tozeroy',
+                fillcolor = 'rgba(100, 100, 255, 0.5)',
+                line = list(color = 'rgba(100, 100, 255, 1)')) |> 
+      layout(
+        title = list(
+          text = "Clustered Histogram: RBFHS Yield of Top 30 Rice-Producing Provinces, by Survey Round (1996WS - 2022DS)",
+          font = list(
+            family = "Roboto",
+            size = 22,
+            color = "black"
+          ),
+          y = 1.1
+        ),
+        margin = list(
+          t = 150
+        ),
+        xaxis = list(
+          title = list(
+            text = "Bin (Yield in mt/ha)",
+            font = list(
+              family = "Roboto",
+              size = 16,
+              color = "black"
+            ),
+            standoff = 20
+          )
+        ),
+        yaxis = list(
+          title = list(
+            text = "Relative Frequency (%)",
+            font = list(
+              family = "Roboto",
+              size = 16,
+              color = "black"
+            ),
+            standoff = 20
+          ),
+          tickformat = ".2%"
+        )
+      )
+
+yield_histo
+```

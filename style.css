@@ -1,0 +1,14 @@
+/* Remove default padding/margins from slides */
+.reveal .slides section {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Force Plotly to fill the entire slide */
+.reveal .slide .plotly {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
